@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbitRay - Gestor de tareas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    {% if request.endpoint in ['index', 'perfil'] %}
+    <div class="position-absolute top-0 end-0 mt-4 me-4 d-flex align-items-center gap-3">
+
+        {% if nombre %}
+            <span class="text-secondary-custom" style="font-weight: 500;">
+                Hola, {{ nombre }}
+            </span>
+        {% endif %}
+
+        <div class="dropdown">
+            <button class="btn btn-light border rounded-circle d-flex align-items-center justify-content-center"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="width: 40px; height: 40px;">
+                
+                <i class="bi bi-person-fill"></i>
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                <li>
+                    <a class="dropdown-item" href="{{ url_for('perfil') }}">
+                        Acerca de...
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ url_for('logout') }}">
+                        Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    {% endif %}
+
+    <div class="mt-4 ms-4 d-flex align-items-center">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" style="width: 70px;" class="me-3">
+        <div class="d-flex flex-column border-end pe-4">
+            <span class="h4 mb-0 fw-bold text-primary-custom">OrbitRay</span>
+            <small class="text-muted" style="font-size: 0.75rem;">Tu vida de una nueva forma</small>
+        </div>
+    </div>
+
+    {% block rayito %}{% endblock %}
+    {% block contenido %}{% endblock %}
+
+</div>
+
+<footer class="mt-5 pt-5 pb-4 footer-border">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="text-center text-md-start mb-3 mb-md-0">
+            <div class="fw-bold text-primary-custom">OrbitRay</div>
+            <small class="text-muted">Organiza tu vida de forma simple</small>
+        </div>
+
+        <div class="text-center">
+            <small class="text-muted">
+                © 2026 OrbitRay. Todos los derechos reservados.
+            </small>
+        </div>
+
+        <div class="d-flex gap-3 mt-3 mt-md-0">
+            <a href="/privacidad" class="text-muted text-decoration-none">Privacidad</a>
+            <a href="/terminos" class="text-muted text-decoration-none">Términos</a>
+            <a href="#" class="text-muted text-decoration-none">Ayuda</a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
